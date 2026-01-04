@@ -24,9 +24,8 @@ RUN npm run build && npm prune --production
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-# إنشاء مستخدم غير جذر
+# إنشاء المستخدم غير الجذر
 RUN addgroup -S app && adduser -S app -G app
-USER app
 
 # نسخ الملفات الضرورية فقط للتشغيل
 COPY --from=builder /app/package*.json ./
@@ -34,8 +33,13 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 
+# إنشاء مجلد الكاش مع صلاحيات كتابة للمستخدم app
+RUN mkdir -p .next/cache/images && chown -R app:app .next/cache
+
 ENV NODE_ENV=production
 ENV PORT=3000
 
+USER app
 EXPOSE $PORT
+
 CMD ["npx", "next", "start", "-p", "3000"]

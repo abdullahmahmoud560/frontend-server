@@ -319,14 +319,11 @@ const NewsDetailPage = () => {
         </div>
 
         <div className={styles.newsImageContainer} onClick={openImageModal}>
-          <Image
-                      loading="lazy"
-
+          <img
             src={newsItem.imageUrl || "/news-placeholder.jpg"}
             alt={newsItem.title}
-            width={800}
-            height={500}
             className={styles.newsImage}
+            style={{ width: '100%', height: 'auto' }}
           />
           <div className={styles.imageOverlay}>
             <div className={styles.imageOverlayContent}>
@@ -347,12 +344,11 @@ const NewsDetailPage = () => {
               {relatedNews.map((news) => (
                 <div key={news.id} className={styles.relatedCard}>
                   <div className={styles.relatedImageContainer}>
-                    <Image
+                    <img
                       src={news.imageUrl || "/news-placeholder.jpg"}
                       alt={news.title}
-                      width={300}
-                      height={200}
                       className={styles.relatedImage}
+                      style={{ width: '100%', height: 'auto' }}
                     />
                   </div>
                   <div className={styles.relatedContent}>

@@ -171,16 +171,11 @@ const NewsPage = () => {
             filteredNews.map((news) => (
               <div key={news.id} className={styles.newsCard}>
                 <div className={styles.newsImageContainer}>
-                  <Image
-                              loading="lazy"
-
-                    src={
-                      news.imageUrl || news.imageURL || "/news-placeholder.jpg"
-                    }
+                  <img
+                    src={news.imageUrl || news.imageURL || "/news-placeholder.jpg"}
                     alt={news.title}
-                    width={400}
-                    height={250}
                     className={styles.newsImage}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                   <div className={styles.newsOverlay}>
                     <Link

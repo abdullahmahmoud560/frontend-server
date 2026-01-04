@@ -4,6 +4,12 @@ const nextConfig = {
     domains: ['cnn-arabic-images.cnn.io', 'backend.bishahcc.org', 'bishahcc.org', 'localhost', 'bisha.runasp.net'],
     remotePatterns: [
       {
+        protocol: 'http',
+        hostname: 'backend.bishahcc.org',
+        port: '',
+        pathname: '/uploads/**',
+      },
+      {
         protocol: 'https',
         hostname: 'backend.bishahcc.org',
         port: '',
