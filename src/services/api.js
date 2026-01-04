@@ -1,0 +1,200 @@
+// API service for connecting to Bisha Chamber backend
+// Base URL for the API
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+// Helper function for making API requests
+async function fetchAPI(endpoint, options = {}) {
+  const url = `${API_BASE_URL}${endpoint}`;
+
+  // Default headers
+  const headers = {
+    "Content-Type": "application/json",
+    ...options.headers,
+  };
+
+  // If we have an auth token, add it to the headers
+  const token = localStorage.getItem("auth_token");
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const config = {
+    ...options,
+    headers,
+  };
+
+  try {
+    const response = await fetch(url, config);
+
+    // Check if the response is ok
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `API error: ${response.status}`);
+    }
+
+    // Check if response has content
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    }
+
+    return await response.text();
+  } catch (error) {
+    console.error("API request failed:", error);
+    throw error;
+  }
+}
+
+// Authentication APIs
+export const authAPI = {
+  login: async (credentials) => {
+    return fetchAPI("/Login", {
+      method: "POST",
+      body: JSON.stringify(credentials),
+    });
+  },
+
+  register: async (userData) => {
+    return fetchAPI("/register", {
+      method: "POST",
+      body: JSON.stringify(userData),
+    });
+  },
+};
+
+// News APIs
+export const newsAPI = {
+  getAll: async (pageNumber = 1) => {
+    return fetchAPI(`/NewsPaper/Get-All/${pageNumber}`);
+  },
+
+  getById: async (id) => {
+    return fetchAPI(`/NewsPaper/Get-All-Circulars-ByID/${id}`);
+  },
+
+  getAllCirculars: async (pageNumber = 1) => {
+    return fetchAPI(`/NewsPaper/Get-All-Circulars/${pageNumber}`);
+  },
+
+  getCircularById: async (id) => {
+    return fetchAPI(`/NewsPaper/Get-All-Circulars-ByID/${id}`);
+  },
+
+  create: async (newsData) => {
+    return fetchAPI("/NewsPaper/Add", {
+      method: "POST",
+      body: JSON.stringify(newsData),
+    });
+  },
+
+  delete: async (id) => {
+    return fetchAPI(`/NewsPaper/Delete/${id}`, {
+      method: "DELETE",
+    });
+  },
+};
+
+// Clients APIs
+export const clientsAPI = {
+  getAll: async () => {
+    return fetchAPI("/Clients");
+  },
+
+  getById: async (id) => {
+    return fetchAPI(`/Clients/${id}`);
+  },
+
+  create: async (clientData) => {
+    return fetchAPI("/Clients", {
+      method: "POST",
+      body: JSON.stringify(clientData),
+    });
+  },
+
+  update: async (id, clientData) => {
+    return fetchAPI(`/Clients/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(clientData),
+    });
+  },
+
+  delete: async (id) => {
+    return fetchAPI(`/Clients/${id}`, {
+      method: "DELETE",
+    });
+  },
+};
+
+// File upload API
+export const fileAPI = {
+  upload: async (file, type) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    return fetchAPI(`/Files/upload?type=${type}`, {
+      method: "POST",
+      headers: {},
+      body: formData,
+    });
+  },
+};
+
+// Users APIs
+export const usersAPI = {
+  getAll: async () => {
+    return fetchAPI("/Users");
+  },
+
+  getById: async (id) => {
+    return fetchAPI(`/Users/${id}`);
+  },
+
+  create: async (userData) => {
+    return fetchAPI("/Users", {
+      method: "POST",
+      body: JSON.stringify(userData),
+    });
+  },
+
+  update: async (id, userData) => {
+    return fetchAPI(`/Users/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(userData),
+    });
+  },
+
+  delete: async (id) => {
+    return fetchAPI(`/Register/Delete/${id}`, {
+      method: "DELETE",
+    });
+  },
+};
+
+// Survey APIs
+export const surveyAPI = {
+  // Submit Sectoral Committees survey
+  submitSectoralCommittees: async (surveyData) => {
+    return fetchAPI("/Sectoral-committees", {
+      method: "POST",
+      body: JSON.stringify(surveyData),
+    });
+  },
+
+  // Submit Subscribers to Services survey
+  submitSubscribersToServices: async (surveyData) => {
+    return fetchAPI("/Subscribers-to-services", {
+      method: "POST",
+      body: JSON.stringify(surveyData),
+    });
+  },
+};
+
+const api = {
+  auth: authAPI,
+  news: newsAPI,
+  clients: clientsAPI,
+  file: fileAPI,
+  users: usersAPI,
+  survey: surveyAPI,
+};
+
+export default api;
