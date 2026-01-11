@@ -103,7 +103,7 @@ const JobApplicationPage = () => {
         <SEO
           title="طلب توظيف - تم الإرسال بنجاح"
           description="تم إرسال طلب التوظيف الخاص بك إلى غرفة بيشة التجارية بنجاح"
-          canonicalUrl="https://bishacci.org.sa/job-application"
+          canonicalUrl="https://bishahcc.org/job-application"
         />
         <div className={styles.container}>
           <div className={styles.successContainer}>
@@ -136,7 +136,7 @@ const JobApplicationPage = () => {
         title="طلب توظيف | غرفة بيشة التجارية"
         description="قدم طلب توظيف لدى غرفة بيشة التجارية. املأ النموذج وأرفق سيرتك الذاتية والوثائق المطلوبة للتقديم على وظيفة."
         keywords={["وظائف بيشة", "وظائف غرفة بيشة", "طلب توظيف", "فرص عمل بيشة", "التوظيف"]}
-        canonicalUrl="https://bishacci.org.sa/job-application"
+        canonicalUrl="https://bishahcc.org/job-application"
       />
       <div className={styles.container}>
         <div className={styles.header}>

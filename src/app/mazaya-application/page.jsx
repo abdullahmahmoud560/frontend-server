@@ -68,7 +68,7 @@ const MazayaApplicationPage = () => {
         <SEO
           title="برنامج مزايا - تم الإرسال بنجاح"
           description="تم إرسال طلب الاشتراك في برنامج مزايا الخاص بك بنجاح"
-          canonicalUrl="https://bishacci.org.sa/mazaya-application"
+          canonicalUrl="https://bishahcc.org/mazaya-application"
         />
         <div className={styles.container}>
           <Toaster position="top-center" />
@@ -109,7 +109,7 @@ const MazayaApplicationPage = () => {
           "عضوية مزايا",
           "خصومات حصرية",
         ]}
-        canonicalUrl="https://bishacci.org.sa/mazaya-application"
+        canonicalUrl="https://bishahcc.org/mazaya-application"
       />
       <div className={styles.container}>
         <Toaster position="top-center" />

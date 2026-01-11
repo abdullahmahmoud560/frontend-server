@@ -7,7 +7,7 @@ export default function robots() {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://bishacci.org.sa/sitemap.xml',
+    sitemap: 'https://bishahcc.org/sitemap.xml',
   };
 }
 

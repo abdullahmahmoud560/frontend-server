@@ -18,7 +18,7 @@ export default function SEO({
   canonicalUrl,
 }: SEOProps) {
   useEffect(() => {
-    const baseUrl = "https://bishacci.org.sa";
+    const baseUrl = "https://bishahcc.org";
     const fullTitle = title.includes('غرفة بيشة') ? title : `${title} | غرفة بيشة التجارية`;
     
     // Update title

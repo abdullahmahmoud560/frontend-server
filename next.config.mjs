@@ -1,33 +1,29 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true, // اختياري لكنه مفيد
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb'
+    },
+  },
   images: {
-    domains: ['cnn-arabic-images.cnn.io', 'backend.bishahcc.org', 'bishahcc.org', 'localhost', 'bisha.runasp.net'],
+    domains: [
+      'cnn-arabic-images.cnn.io',
+      'backend.bishahcc.org',
+      'bishahcc.org',
+      'localhost',
+      'bisha.runasp.net'
+    ],
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'backend.bishahcc.org',
-        port: '',
-        pathname: '/uploads/**',
+        hostname: '**', // لو عايز تسمح بكل host ممكن تستخدم remotePatterns بحذر
       },
       {
         protocol: 'https',
-        hostname: 'backend.bishahcc.org',
-        port: '',
-        pathname: '/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cnn-arabic-images.cnn.io',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'bisha.runasp.net',
-        port: '',
-        pathname: '/uploads/**',
-      },
-    ],
+        hostname: '**',
+      }
+    ], unoptimized: true, // بدل ما تعمل override
   },
   webpack: (config) => {
     config.module.rules.push({

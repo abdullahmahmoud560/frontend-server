@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bishacci.org.sa/sitemap.xml
+Sitemap: https://bishahcc.org/sitemap.xml

@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = "https://bishacci.org.sa";
+  const baseUrl = "https://bishahcc.org";
 
   const routes = [
     "",
