@@ -1,6 +1,5 @@
 "use client";
 
-import { Tajawal } from "next/font/google";
 import { Download, Loader2, LockKeyhole, Vote } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,10 +27,28 @@ type VoteItem = {
 
 type AuthMode = "none" | "registered" | "otp";
 
-const tajawal = Tajawal({
-  subsets: ["arabic"],
-  weight: ["200", "300", "400", "500", "700", "800", "900"],
-});
+// Font configuration with fallback
+const tajawal = {
+  className: 'font-sans', // Fallback font class
+};
+
+// Only load the font in the browser to avoid build-time issues
+if (typeof window !== 'undefined') {
+  try {
+    const { Tajawal } = require('next/font/google');
+    const font = Tajawal({
+      weight: ['300', '400', '500', '700'],
+      subsets: ['arabic'],
+      display: 'swap',
+      variable: '--font-tajawal',
+      preload: true,
+      fallback: ['system-ui', 'sans-serif']
+    });
+    Object.assign(tajawal, font);
+  } catch (error) {
+    console.error('Failed to load Tajawal font:', error);
+  }
+}
 
 function clampPercent(value: number) {
   if (Number.isNaN(value)) return 0;

@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true, // اختياري لكنه مفيد
+  output: 'standalone', // ✅ مهم جداً لحل مشكلة Docker
+
+  reactStrictMode: true,
   experimental: {
     serverActions: {
-      bodySizeLimit: '2mb'
+      bodySizeLimit: '2mb',
     },
   },
   images: {
@@ -12,18 +14,19 @@ const nextConfig = {
       'backend.bishahcc.org',
       'bishahcc.org',
       'localhost',
-      'bisha.runasp.net'
+      'bisha.runasp.net',
     ],
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '**', // لو عايز تسمح بكل host ممكن تستخدم remotePatterns بحذر
+        hostname: '**',
       },
       {
         protocol: 'https',
         hostname: '**',
-      }
-    ], unoptimized: true, // بدل ما تعمل override
+      },
+    ],
+    unoptimized: true,
   },
   webpack: (config) => {
     config.module.rules.push({
